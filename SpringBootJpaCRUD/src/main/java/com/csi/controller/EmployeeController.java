@@ -2,6 +2,8 @@ package com.csi.controller;
 
 import java.util.List;
 import java.util.Optional;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,6 +24,7 @@ import javassist.NotFoundException;
 
 @RestController
 @CrossOrigin
+@Slf4j
 public class EmployeeController {
 
 	@Autowired
@@ -30,6 +33,8 @@ public class EmployeeController {
 	//insert single record
 	@PostMapping("/saveData")
 	public ResponseEntity<String> saveData(@RequestBody Employee employee) {
+		log.info("saveData() method of EmployeeController is called");
+
 		employeeService.saveData(employee);
 		return ResponseEntity.ok("Data Saved");
 	}
@@ -37,6 +42,8 @@ public class EmployeeController {
 	//Save all data 
 	@PostMapping("/saveAllData")
 	public ResponseEntity<String> saveMultipleData(@RequestBody List<Employee> employees) {
+		log.info("saveMultipleData() method of EmployeeController is called");
+
 		employeeService.saveAllData(employees);
 		return ResponseEntity.ok("All data saved");
 	}
@@ -44,6 +51,8 @@ public class EmployeeController {
 	//get records by specific id
 	@GetMapping("/getDataById/{empId}")
 	public ResponseEntity<Optional<Employee>> getDataById(@PathVariable("empId") int empId) {
+		log.info("getDataById() method of EmployeeController is called");
+
 		return ResponseEntity.ok(employeeService.getDataById(empId));
 	}
 
